@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{% static 'assets/logo.png' %}">
+    <title>Credit Repair Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white text-black p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <div class="text-2xl font-bold">
+                <img src="{% static 'assets/logo.png' %}" alt="Logo" class="h-14">
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href="#" class="hover:underline">Home</a></li>
+                <li><a href="#" class="hover:underline">Features</a></li>
+                <li><a href="#" class="hover:underline">Pricing</a></li>
+                <li><a href="#" class="hover:underline">Contact</a></li>
+                <li><a href="{% url 'users:login' %}" class="hover:underline">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-blue-700 text-white py-20">
+        <div class="container mx-auto text-center">
+            <h1 class="text-5xl font-bold mb-4">Fix Your Credit with Ease</h1>
+            <p class="text-xl mb-6">Automated, fast, and secure credit repair software designed for everyone.</p>
+            <button class="bg-yellow-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-yellow-600">
+                Get Started Today
+            </button>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-20 bg-gray-100">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-8">How It Works</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="bg-white p-6 shadow-lg rounded-lg">
+                    <div class="text-5xl text-yellow-500 mb-4">1</div>
+                    <h3 class="text-2xl font-bold mb-4">Sign Up</h3>
+                    <p>Create an account and provide your basic information. It only takes a few minutes to get started.
+                    </p>
+                </div>
+                <!-- Step 2 -->
+                <div class="bg-white p-6 shadow-lg rounded-lg">
+                    <div class="text-5xl text-yellow-500 mb-4">2</div>
+                    <h3 class="text-2xl font-bold mb-4">Import Your Credit Report</h3>
+                    <p>Securely import your credit report and let our system analyze any discrepancies.</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="bg-white p-6 shadow-lg rounded-lg">
+                    <div class="text-5xl text-yellow-500 mb-4">3</div>
+                    <h3 class="text-2xl font-bold mb-4">Automate Disputes</h3>
+                    <p>Our platform will automatically generate dispute letters to resolve errors on your credit report.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-8">Why Choose CreditFix?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white p-6 shadow-lg rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4">Automated Dispute Letters</h3>
+                    <p>Easily generate dispute letters for all your credit issues with our proven templates.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="bg-white p-6 shadow-lg rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4">Track Your Progress</h3>
+                    <p>Monitor the status of your disputes in real-time with our user-friendly dashboard.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="bg-white p-6 shadow-lg rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4">Secure & Reliable</h3>
+                    <p>We use top-notch security measures to ensure your personal data is protected.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="bg-gray-100 py-20">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-8">Pricing</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Plan 1 -->
+                <div class="bg-white p-6 shadow-lg rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4">Basic Plan</h3>
+                    <p class="mb-4">$29.95/month</p>
+                    <button class="bg-blue-700 text-white py-3 px-6 rounded-lg hover:bg-blue-800">Sign Up</button>
+                </div>
+                <!-- Plan 2 -->
+                <div class="bg-white p-6 shadow-lg rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4">Pro Plan</h3>
+                    <p class="mb-4">$49.95/month</p>
+                    <button class="bg-blue-700 text-white py-3 px-6 rounded-lg hover:bg-blue-800">Sign Up</button>
+                </div>
+                <!-- Plan 3 -->
+                <div class="bg-white p-6 shadow-lg rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4">Enterprise Plan</h3>
+                    <p class="mb-4">$99.95/month</p>
+                    <button class="bg-blue-700 text-white py-3 px-6 rounded-lg hover:bg-blue-800">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-800 text-white p-4 text-center">
+        <p>&copy; 2024 CreditFix. All Rights Reserved.</p>
+        <p>
+            <a href="{% url 'company:company_register' %}" class="text-white underline hover:text-blue-200">
+                Register Your Company
+            </a>
+        </p>
+    </footer>
+
+
+    <!-- JavaScript (Optional) -->
+    <script>
+        // Example of adding interactivity with JavaScript (modal or other features)
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                alert('Button clicked!');
+            });
+        });
+    </script>
+</body>
+
+</html>

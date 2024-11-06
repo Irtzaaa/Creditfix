@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Company Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-6 text-center">Company Login</h2>
+        {% if form.errors %}
+            <div class="mb-4">
+                <ul class="text-red-600">
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="id_username" class="block text-gray-700">Username</label>
+                {{ form.username }}
+            </div>
+            <div class="mb-6">
+                <label for="id_password" class="block text-gray-700">Password</label>
+                {{ form.password }}
+            </div>
+            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
+                Login
+            </button>
+        </form>
+        <div class="mt-4 text-center">
+            <p>Don’t have an account? 
+                <a href="{% url 'company:company_register' %}" class="text-blue-500 underline hover:text-blue-700">Register here</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

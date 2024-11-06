@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Company</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-6 text-center">Register Your Company</h2>
+        {% if form.errors %}
+            <div class="mb-4">
+                <ul class="text-red-600">
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-4">
+                {{ form.username.label_tag }}<br>
+                {{ form.username }}
+            </div>
+            <div class="mb-4">
+                {{ form.email.label_tag }}<br>
+                {{ form.email }}
+            </div>
+            <div class="mb-4">
+                {{ form.company_name.label_tag }}<br>
+                {{ form.company_name }}
+            </div>
+            <div class="mb-4">
+                {{ form.address.label_tag }}<br>
+                {{ form.address }}
+            </div>
+            <div class="mb-4">
+                {{ form.password1.label_tag }}<br>
+                {{ form.password1 }}
+            </div>
+            <div class="mb-6">
+                {{ form.password2.label_tag }}<br>
+                {{ form.password2 }}
+            </div>
+            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
+                Register
+            </button>
+        </form>
+        <div class="mt-4 text-center">
+            <p>Already registered? 
+                <a href="{% url 'company:company_login' %}" class="text-blue-500 underline hover:text-blue-700">Click to login</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

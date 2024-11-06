@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creditup Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        .bg-primary {
+            background-color: white; /* White color for navbar */
+        }
+        .bg-sidebar {
+            background-color: #2d3748; /* Dark blue for sidebar */
+        }
+        .bg-accent {
+            background-color: #3b82f6; /* Bright blue */
+        }
+        .bg-hover:hover {
+            background-color: #374151; /* Hover effect for sidebar */
+        }
+        .text-yellow {
+            background-color: #fffbeb; /* Light yellow for notification bar */
+            border-left: 4px solid #fbbf24; /* Dark yellow left border */
+        }
+        .btn-icon {
+            background-color: #e5e7eb; /* Light gray buttons */
+            border-radius: 0.25rem;
+            padding: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+        .btn-icon:hover {
+            background-color: #d1d5db; /* Darker gray on hover */
+        }
+        .btn-blue {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .tab-button {
+            border-bottom: 2px solid transparent;
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        .tab-button.active {
+            border-color: #3b82f6; /* Bright blue underline for active tab */
+        }
+        .tab-button:hover {
+            background-color: #e5e7eb;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            min-width: 160px;
+            right: 0;
+            z-index: 10;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .modal-bg {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Top Navbar with Dropdown -->
+    <div class="w-full bg-primary p-4 flex justify-between items-center text-black border-b border-gray-300">
+        <h1 class="text-xl font-bold">Setting</h1>
+        <div class="dropdown relative">
+            <!-- My Account Button -->
+            <button class="text-black p-2 rounded">My Account</button>
+            <div class="dropdown-content right-0">
+                <a href="#">Profile</a>
+                <a href="#">Billing</a>
+                <a href="#">Help</a>
+                <a href="{% url 'users:logout' %}">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <div class="w-1/5 bg-sidebar text-white p-4 flex flex-col justify-between">
+            <div>
+                <!-- Disputebee Logo -->
+                <h2 class="text-2xl font-bold mb-6">Credit up</h2>
+                <ul>
+                    <li class="mb-4 flex items-center"><i class="fas fa-home mr-2"></i><a href="{% url 'users:dashboard' %}" class="hover:bg-hover p-2 block rounded">Home</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-file-alt mr-2"></i><a href="{% url 'users:credit_report' %}" class="hover:bg-hover p-2 block rounded">Credit Report</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-tasks mr-2"></i><a href="{% url 'users:disputes' %}" class="hover:bg-hover p-2 block rounded">Disputes</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-book mr-2"></i><a href="#" class="hover:bg-hover p-2 block rounded">Letter Library</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-video mr-2"></i><a href="#" class="hover:bg-hover p-2 block rounded">Video Tutorials</a></li>
+                </ul>
+            </div>
+            <div>
+                <!-- Outline Button for Become an Affiliate -->
+                <a href="#" class="border border-accent text-accent p-2 rounded block text-center mb-4">Become an Affiliate</a>
+
+                <!-- Icons and Text for Settings, Help, and Logout -->
+                <ul>
+                    <li class="mb-4 flex items-center"><i class="fas fa-cog mr-2"></i><a href="#" class="hover:bg-hover p-2 block rounded">Settings</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-question-circle mr-2"></i><a href="#" class="hover:bg-hover p-2 block rounded">Help</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-sign-out-alt mr-2"></i><a href="{% url 'users:logout' %}" class="hover:bg-hover p-2 block rounded">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main content with the form -->
+        <div class="w-4/5 p-6">
+            <!-- Form for Basic Info -->
+            <h2 class="text-2xl font-semibold mb-4">Basic Info</h2>
+            <form action="#" method="POST" class="bg-white p-6 rounded-lg shadow-md">
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="firstname" class="block text-gray-700 font-semibold">First Name</label>
+                        <input type="text" id="firstname" name="firstname" class="border border-gray-300 p-2 rounded w-full" required>
+                    </div>
+                    <div>
+                        <label for="lastname" class="block text-gray-700 font-semibold">Last Name</label>
+                        <input type="text" id="lastname" name="lastname" class="border border-gray-300 p-2 rounded w-full" required>
+                    </div>
+                    <div>
+                        <label for="address" class="block text-gray-700 font-semibold">Address</label>
+                        <input type="text" id="address" name="address" class="border border-gray-300 p-2 rounded w-full" required>
+                    </div>
+                    <div>
+                        <label for="address2" class="block text-gray-700 font-semibold">Address 2</label>
+                        <input type="text" id="address2" name="address2" class="border border-gray-300 p-2 rounded w-full">
+                    </div>
+                    <div>
+                        <label for="city" class="block text-gray-700 font-semibold">City</label>
+                        <input type="text" id="city" name="city" class="border border-gray-300 p-2 rounded w-full" required>
+                    </div>
+                    <div>
+                        <label for="state" class="block text-gray-700 font-semibold">State</label>
+                        <input type="text" id="state" name="state" class="border border-gray-300 p-2 rounded w-full" required>
+                    </div>
+                    <div>
+                        <label for="zip" class="block text-gray-700 font-semibold">Zip</label>
+                        <input type="text" id="zip" name="zip" class="border border-gray-300 p-2 rounded w-full" required>
+                    </div>
+                    <div>
+                        <label for="ssn" class="block text-gray-700 font-semibold">Social Security Number</label>
+                        <input type="text" id="ssn" name="ssn" class="border border-gray-300 p-2 rounded w-full" required>
+                    </div>
+                </div>
+
+                <!-- Contact Info Section -->
+                <h2 class="text-2xl font-semibold mb-4">Contact Info</h2>
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label for="phone" class="block text-gray-700 font-semibold">Phone</label>
+                        <input type="text" id="phone" name="phone" class="border border-gray-300 p-2 rounded w-full" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-gray-700 font-semibold">Email</label>
+                        <input type="email" id="email" name="email" class="border border-gray-300 p-2 rounded w-full" required>
+                    </div>
+                    <div>
+                        <label for="dob" class="block text-gray-700 font-semibold">Date of Birth</label>
+                        <input type="date" id="dob" name="dob" class="border border-gray-300 p-2 rounded w-full" required>
+                    </div>
+                </div>
+
+                <!-- Save Button -->
+                <button type="submit" class="bg-blue-500 text-white p-3 rounded">Save Basic Info</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

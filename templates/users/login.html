@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CreditFix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-blue-800 text-white p-4">
+        <div class="container mx-auto">
+            <div class="text-2xl font-bold">CreditFix</div>
+        </div>
+    </nav>
+
+    <!-- Login Form -->
+    <section class="flex justify-center items-center h-screen">
+        <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+            <h2 class="text-3xl font-bold text-center mb-6">Login to Your Account</h2>
+            <form action="{% url 'users:login' %}" method="POST">
+                <!-- CSRF Token for Django -->
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-semibold mb-2">Email</label>
+                    <input type="email" name="email" id="email" required class="w-full p-3 border rounded-lg focus:outline-none focus:border-blue-500" placeholder="Enter your email">
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block text-sm font-semibold mb-2">Password</label>
+                    <input type="password" name="password" id="password" required class="w-full p-3 border rounded-lg focus:outline-none focus:border-blue-500" placeholder="Enter your password">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700">
+                    Login
+                </button>
+            </form>
+            <p class="text-center mt-4">Don't have an account? <a href="{% url 'users:register' %}" class="text-blue-500 hover:underline">Register here</a></p>
+        </div>
+    </section>
+</body>
+</html>

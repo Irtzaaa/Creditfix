@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creditup Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        .bg-primary {
+            background-color: white; /* White color for navbar */
+        }
+        .bg-sidebar {
+            background-color: #2d3748; /* Dark blue for sidebar */
+        }
+        .bg-accent {
+            background-color: #3b82f6; /* Bright blue */
+        }
+        .bg-hover:hover {
+            background-color: #374151; /* Hover effect for sidebar */
+        }
+        /* Custom button colors */
+        .btn-blue {
+            background-color: #3b82f6;
+        }
+        .btn-green {
+            background-color: #16a34a;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            min-width: 160px;
+            right: 0;
+            z-index: 1;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Top Navbar with Dropdown -->
+    <div class="w-full bg-primary p-4 flex justify-between items-center text-black border-b border-gray-300">
+        <h1 class="text-xl font-bold">Credit Report</h1>
+        <div class="dropdown relative">
+            <!-- My Account Button -->
+            <button class="text-black p-2 rounded">My Account</button>
+            <div class="dropdown-content right-0">
+                <a href="{% url 'users:setting' %}">Setting</a>
+                <a href="#">Billing</a>
+                <a href="#">Help</a>
+                <a href="{% url 'users:logout' %}">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <div class="w-1/5 bg-sidebar text-white p-4 flex flex-col justify-between">
+            <div>
+                <!-- Disputebee Logo -->
+                <h2 class="text-2xl font-bold mb-6">Credit up</h2>
+                <ul>
+                    <li class="mb-4 flex items-center"><i class="fas fa-home mr-2"></i><a href="{% url 'users:dashboard' %}" class="hover:bg-hover p-2 block rounded">Home</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-file-alt mr-2"></i><a href="{% url 'users:credit_report' %}" class="hover:bg-hover p-2 block rounded">Credit Report</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-tasks mr-2"></i><a href="{% url 'users:disputes' %}" class="hover:bg-hover p-2 block rounded">Disputes</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-book mr-2"></i><a href="#" class="hover:bg-hover p-2 block rounded">Letter Library</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-video mr-2"></i><a href="#" class="hover:bg-hover p-2 block rounded">Video Tutorials</a></li>
+                </ul>
+            </div>
+            <div>
+                <!-- Outline Button for Become an Affiliate -->
+                <a href="#" class="border border-accent text-accent p-2 rounded block text-center mb-4">Become an Affiliate</a>
+
+                <!-- Icons and Text for Settings, Help, and Logout -->
+                <ul>
+                    <li class="mb-4 flex items-center"><i class="fas fa-cog mr-2"></i><a href="{% url 'users:setting' %}" class="hover:bg-hover p-2 block rounded">Settings</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-question-circle mr-2"></i><a href="#" class="hover:bg-hover p-2 block rounded">Help</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-sign-out-alt mr-2"></i><a href="{% url 'users:logout' %}" class="hover:bg-hover p-2 block rounded">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main content for How to Import Credit Report -->
+        <div class="w-4/5 p-6">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">How to Import Your Credit Report</h2>
+            <div class="flex justify-center gap-12">
+                <!-- Step 1 Section -->
+                <div class="bg-white p-6 rounded-lg shadow-md w-1/2">
+                    <h3 class="text-xl font-semibold mb-4">Step 1. Create a Refresh.me Account</h3>
+                    <div class="flex justify-center mb-4">
+                        <img src="https://via.placeholder.com/80x80" alt="Icon">
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        You can access your credit report directly from Refresh.me. 
+                        <a href="#" class="text-blue-600 underline">USE THIS LINK</a> to create an account and access your 3-bureau credit report instantly.
+                    </p>
+                    <div class="flex justify-between gap-4">
+                        <button class="btn-blue text-white p-2 rounded">What is Refresh.me?</button>
+                        <button class="btn-blue text-white p-2 rounded">Watch tutorial</button>
+                    </div>
+                </div>
+
+                <!-- Arrow Icon in Between -->
+                <div class="flex justify-center items-center">
+                    <i class="fas fa-arrow-right text-blue-600 text-2xl"></i>
+                </div>
+
+                <!-- Step 2 Section -->
+                <div class="bg-white p-6 rounded-lg shadow-md w-1/2">
+                    <h3 class="text-xl font-semibold mb-4">Step 2. Import from Refresh.me</h3>
+                    <label class="block text-gray-700 mb-2">Refresh.me Email</label>
+                    <input type="email" placeholder="Refresh.me Email" class="border border-gray-300 p-2 w-full rounded mb-4">
+                    
+                    <label class="block text-gray-700 mb-2">Refresh.me Share Code</label>
+                    <input type="text" placeholder="Share Code" class="border border-gray-300 p-2 w-full rounded mb-4">
+                    
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="text-blue-600 underline">Need help finding your share code?</a>
+                        <button class="btn-green text-white p-2 rounded">Import Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

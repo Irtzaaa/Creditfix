@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creditup Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        .bg-primary {
+            background-color: white; /* White color for navbar */
+        }
+        .bg-sidebar {
+            background-color: #2d3748; /* Dark blue for sidebar */
+        }
+        .bg-accent {
+            background-color: #3b82f6; /* Bright blue */
+        }
+        .bg-hover:hover {
+            background-color: #374151; /* Hover effect for sidebar */
+        }
+        /* Custom box colors */
+        .box-blue {
+            background-color: #3b82f6;
+        }
+        .box-purple {
+            background-color: #6b21a8;
+        }
+        .box-red {
+            background-color: #dc2626;
+        }
+        .box-green {
+            background-color: #16a34a;
+        }
+
+        /* Fix for dropdown */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            min-width: 160px;
+            right: 0;
+            z-index: 1;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        /* Custom number circles */
+        .number-circle {
+            background-color: #3b82f6;
+            color: white;
+            font-weight: bold;
+            padding: 0.5rem;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 2rem;
+            width: 2rem;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Top Navbar with Dropdown -->
+    <div class="w-full bg-primary p-4 flex justify-between items-center text-black border-b border-gray-300">
+        <!-- Navbar with My Account Dropdown -->
+        <h1 class="text-xl font-bold">Home</h1>
+        <div class="dropdown relative">
+            <!-- My Account Button -->
+            <button class="text-black p-2 rounded">My Account</button>
+            <div class="dropdown-content right-0">
+                <a href="{% url 'users:setting' %}">Setting</a>
+                <a href="#">Billing</a>
+                <a href="#">Help</a>
+                <a href="{% url 'users:logout' %}">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <div class="w-1/5 bg-sidebar text-white p-4 flex flex-col justify-between">
+            <div>
+                <!-- Creditup Logo -->
+                <h2 class="text-2xl font-bold mb-6">Credit Up</h2>
+                <ul>
+                    <li class="mb-4 flex items-center"><i class="fas fa-home mr-2"></i><a href="#" class="hover:bg-hover p-2 block rounded">Home</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-file-alt mr-2"></i><a href="{% url 'users:credit_report' %}" class="hover:bg-hover p-2 block rounded">Credit Report</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-tasks mr-2"></i><a href="{% url 'users:disputes' %}" class="hover:bg-hover p-2 block rounded">Disputes</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-book mr-2"></i><a href="#" class="hover:bg-hover p-2 block rounded">Letter Library</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-video mr-2"></i><a href="#" class="hover:bg-hover p-2 block rounded">Video Tutorials</a></li>
+                </ul>
+            </div>
+            <div>
+                <!-- Outline Button for Become an Affiliate -->
+                <a href="#" class="border border-accent text-accent p-2 rounded block text-center mb-4">Become an Affiliate</a>
+                
+                <!-- Icons and Text for Settings, Help, and Logout -->
+                <ul>
+                    <li class="mb-4 flex items-center"><i class="fas fa-cog mr-2"></i><a href="{% url 'users:setting' %}" class="hover:bg-hover p-2 block rounded">Settings</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-question-circle mr-2"></i><a href="#" class="hover:bg-hover p-2 block rounded">Help</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-sign-out-alt mr-2"></i><a href="{% url 'users:logout' %}" class="hover:bg-hover p-2 block rounded">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="w-4/5 p-6">
+            <div class="grid grid-cols-4 gap-4 mb-6">
+                <div class="p-4 rounded shadow text-white box-blue">
+                    <h2 class="text-lg font-semibold mb-2">Active Disputes</h2>
+                    <p class="text-3xl">0</p>
+                </div>
+                <div class="p-4 rounded shadow text-white box-purple">
+                    <h2 class="text-lg font-semibold mb-2">Closed Disputes</h2>
+                    <p class="text-3xl">0</p>
+                </div>
+                <div class="p-4 rounded shadow text-white box-red">
+                    <h2 class="text-lg font-semibold mb-2">Items Removed</h2>
+                    <p class="text-3xl">0</p>
+                </div>
+                <div class="p-4 rounded shadow text-white box-green">
+                    <h2 class="text-lg font-semibold mb-2">Credit Report Status</h2>
+                    <p>Credentials: N/A</p>
+                    <p>Last Pull Attempt: N/A</p>
+                    <p>Last Pull Status: N/A</p>
+                    <p>Last Report Date: N/A</p>
+                </div>
+            </div>
+
+            <!-- Outlined Watch Intro Video Button -->
+            <div class="bg-white p-4 rounded shadow mb-6">
+                <h2 class="text-lg font-semibold mb-2 text-gray-600">Getting Started</h2>
+                <button class="border border-accent text-accent p-2 rounded">Watch Intro Video</button>
+            </div>
+
+            <!-- Numbered Sections with Outline Buttons -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white p-4 rounded shadow relative">
+                    <div class="number-circle">1</div>
+                    <h3 class="font-semibold mb-2 text-gray-600">Import Your Credit Report</h3>
+                    <p class="text-gray-600">Your first step to using Creditup is to import your credit report. Your credit report will be automatically analyzed to look for negative items.</p>
+                    <!-- Outline Button for Import -->
+                    <button class="border border-accent text-accent p-2 rounded mt-2">Import Now</button>
+                </div>
+                <div class="bg-white p-4 rounded shadow relative">
+                    <div class="number-circle">2</div>
+                    <h3 class="font-semibold mb-2 text-gray-600">Save Your Name, Address, etc.</h3>
+                    <p class="text-gray-600">This information is used to automatically populate dispute letter templates with your personal information. Without it, you will need to manually edit each letter.</p>
+                    <!-- Outline Button for Save -->
+                    <button class="border border-accent text-accent p-2 rounded mt-2">Edit Basic Information</button>
+                </div>
+
+                <!-- Two Additional Numbered Sections -->
+                <div class="bg-white p-4 rounded shadow relative">
+                    <div class="number-circle">3</div>
+                    <h3 class="font-semibold mb-2 text-gray-600">Create Dispute Letters</h3>
+                    <p class="text-gray-600">Automatically generate dispute letters to send to credit bureaus for any negative items found in your report.</p>
+                    <!-- Outline Button for Create -->
+                    <button class="border border-accent text-accent p-2 rounded mt-2">Create Now</button>
+                </div>
+                <div class="bg-white p-4 rounded shadow relative">
+                    <div class="number-circle">4</div>
+                    <h3 class="font-semibold mb-2 text-gray-600">Track Your Disputes</h3>
+                    <p class="text-gray-600">Stay updated on the status of your disputes by tracking their progress in real-time.</p>
+                    <!-- Outline Button for Track -->
+                    <button class="border border-accent text-accent p-2 rounded mt-2">Track Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

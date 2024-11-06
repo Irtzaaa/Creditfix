@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creditup Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        .bg-primary {
+            background-color: white; /* White color for navbar */
+        }
+        .bg-sidebar {
+            background-color: #2d3748; /* Dark blue for sidebar */
+        }
+        .bg-accent {
+            background-color: #3b82f6; /* Bright blue */
+        }
+        .bg-hover:hover {
+            background-color: #374151; /* Hover effect for sidebar */
+        }
+        .text-yellow {
+            background-color: #fffbeb; /* Light yellow for notification bar */
+            border-left: 4px solid #fbbf24; /* Dark yellow left border */
+        }
+        .btn-icon {
+            background-color: #e5e7eb; /* Light gray buttons */
+            border-radius: 0.25rem;
+            padding: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+        .btn-icon:hover {
+            background-color: #d1d5db; /* Darker gray on hover */
+        }
+        .btn-blue {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .tab-button {
+            border-bottom: 2px solid transparent;
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        .tab-button.active {
+            border-color: #3b82f6; /* Bright blue underline for active tab */
+        }
+        .tab-button:hover {
+            background-color: #e5e7eb;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            min-width: 160px;
+            right: 0;
+            z-index: 10;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .modal-bg {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+    </style>
+    <script>
+        function openNewDispute() {
+            document.getElementById("newDisputeModal").classList.remove("hidden");
+        }
+        function closeNewDispute() {
+            document.getElementById("newDisputeModal").classList.add("hidden");
+        }
+        function openReceivedReply() {
+            document.getElementById("receivedReplyModal").classList.remove("hidden");
+        }
+        function closeReceivedReply() {
+            document.getElementById("receivedReplyModal").classList.add("hidden");
+        }
+        function openFollowUpLetter() {
+            document.getElementById("followUpLetterModal").classList.remove("hidden");
+        }
+        function closeFollowUpLetter() {
+            document.getElementById("followUpLetterModal").classList.add("hidden");
+        }
+        function closeAlert() {
+            document.getElementById("userSettingsAlert").classList.add("hidden");
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Top Navbar with Dropdown -->
+    <div class="w-full bg-primary p-4 flex justify-between items-center text-black border-b border-gray-300">
+        <h1 class="text-xl font-bold">Disputes</h1>
+        <div class="dropdown relative">
+            <!-- My Account Button -->
+            <button class="text-black p-2 rounded">My Account</button>
+            <div class="dropdown-content right-0">
+                <a href="{% url 'users:setting' %}">Setting</a>
+                <a href="#">Billing</a>
+                <a href="#">Help</a>
+                <a href="{% url 'users:logout' %}">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <div class="w-1/5 bg-sidebar text-white p-4 flex flex-col justify-between">
+            <div>
+                <!-- Disputebee Logo -->
+                <h2 class="text-2xl font-bold mb-6">Credit Up</h2>
+                <ul>
+                    <li class="mb-4 flex items-center"><i class="fas fa-home mr-2"></i><a href="{% url 'users:dashboard' %}" class="hover:bg-hover p-2 block rounded">Home</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-file-alt mr-2"></i><a href="{% url 'users:credit_report' %}" class="hover:bg-hover p-2 block rounded">Credit Report</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-tasks mr-2"></i><a href="#" class="hover:bg-hover p-2 block rounded">Disputes</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-book mr-2"></i><a href="#" class="hover:bg-hover p-2 block rounded">Letter Library</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-video mr-2"></i><a href="#" class="hover:bg-hover p-2 block rounded">Video Tutorials</a></li>
+                </ul>
+            </div>
+            <div>
+                <!-- Outline Button for Become an Affiliate -->
+                <a href="#" class="border border-accent text-accent p-2 rounded block text-center mb-4">Become an Affiliate</a>
+
+                <!-- Icons and Text for Settings, Help, and Logout -->
+                <ul>
+                    <li class="mb-4 flex items-center"><i class="fas fa-cog mr-2"></i><a href="{% url 'users:setting' %}" class="hover:bg-hover p-2 block rounded">Settings</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-question-circle mr-2"></i><a href="#" class="hover:bg-hover p-2 block rounded">Help</a></li>
+                    <li class="mb-4 flex items-center"><i class="fas fa-sign-out-alt mr-2"></i><a href="{% url 'users:logout' %}" class="hover:bg-hover p-2 block rounded">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main content for Disputes Section -->
+        <div class="w-4/5 p-6">
+            <!-- Cancelable Alert -->
+            <div id="userSettingsAlert" class="text-yellow p-4 rounded-md mb-6 flex justify-between items-center">
+                <p>
+                    <i class="fas fa-info-circle text-yellow-500"></i>
+                    Go to <a href="#" class="text-blue-600 underline">User Settings</a> to enter your name, address, etc. This will allow you to populate the required personal information into dispute letter templates automatically.
+                </p>
+                <button onclick="closeAlert()" class="text-gray-600">&times;</button>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex gap-4 mb-6">
+                <button onclick="openNewDispute()" class="btn-icon"><i class="fas fa-file-alt mr-2"></i>NEW DISPUTE</button>
+                <button onclick="openReceivedReply()" class="btn-icon"><i class="fas fa-envelope-open-text mr-2"></i>RECEIVED REPLY</button>
+                <button onclick="openFollowUpLetter()" class="btn-icon"><i class="fas fa-plus mr-2"></i>FOLLOWUP LETTER</button>
+                <button class="btn-icon"><i class="fas fa-file mr-2"></i>OTHER LETTER</button>
+                <button class="btn-icon"><i class="fas fa-table mr-2"></i>DISPUTES OVERVIEW</button>
+            </div>
+
+            <!-- Letters Section -->
+            <div class="bg-white p-4 rounded-md shadow">
+                <div class="flex gap-12 mb-4">
+                    <button class="tab-button active">Unsent</button>
+                    <button class="tab-button">Sent</button>
+                    <button class="tab-button">Received</button>
+                </div>
+
+                <div class="flex justify-between mb-4">
+                    <div class="flex gap-8">
+                        <p class="w-16">Date</p>
+                        <p class="w-24">To</p>
+                        <p class="w-48">Letter Name</p>
+                        <p class="w-16">Type</p>
+                    </div>
+                    <div class="flex">
+                        <input type="text" class="border border-gray-300 rounded p-2" placeholder="Search">
+                        <button class="ml-2 border border-gray-300 rounded p-2">Clear</button>
+                    </div>
+                </div>
+
+                <div class="text-center py-8 text-gray-500">
+                    <i class="fas fa-inbox fa-2x mb-4"></i>
+                    <p>No Data</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for New Dispute -->
+    <div id="newDisputeModal" class="fixed hidden inset-0 flex items-center justify-center modal-bg z-50">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-1/2">
+            <div class="flex justify-between mb-6">
+                <h2 class="text-xl font-semibold">Create New Dispute(s)</h2>
+                <button onclick="closeNewDispute()" class="text-red-500">Cancel</button>
+            </div>
+            <div class="mb-4">
+                <p class="text-gray-600 font-semibold">1. Choose Type</p>
+                <div class="grid grid-cols-6 gap-4 mt-4">
+                    <button class="border p-4 rounded text-center">
+                        <i class="fas fa-file-alt fa-2x text-gray-400 mb-2"></i>
+                        <p>Collections</p>
+                    </button>
+                    <button class="border p-4 rounded text-center">
+                        <i class="fas fa-search fa-2x text-gray-400 mb-2"></i>
+                        <p>Inquiries</p>
+                    </button>
+                    <button class="border p-4 rounded text-center">
+                        <i class="fas fa-clock fa-2x text-gray-400 mb-2"></i>
+                        <p>Late Payments</p>
+                    </button>
+                    <button class="border p-4 rounded text-center">
+                        <i class="fas fa-minus-circle fa-2x text-gray-400 mb-2"></i>
+                        <p>Chargeoffs</p>
+                    </button>
+                    <button class="border p-4 rounded text-center">
+                        <i class="fas fa-university fa-2x text-gray-400 mb-2"></i>
+                        <p>Bankruptcies</p>
+                    </button>
+                    <button class="border p-4 rounded text-center">
+                        <i class="fas fa-question-circle fa-2x text-gray-400 mb-2"></i>
+                        <p>Other</p>
+                    </button>
+                </div>
+            </div>
+            <div class="mt-6 flex justify-between">
+                <a href="#" class="text-blue-600 underline">Or click here to view a list of all accounts</a>
+                <button class="bg-blue-500 text-white p-3 rounded">Next Step</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Received Reply -->
+    <div id="receivedReplyModal" class="fixed hidden inset-0 flex items-center justify-center modal-bg z-50">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-1/2">
+            <div class="flex justify-between mb-6">
+                <h2 class="text-xl font-semibold">Received a Reply</h2>
+                <button onclick="closeReceivedReply()" class="text-red-500">Cancel</button>
+            </div>
+            <div class="grid grid-cols-3 gap-4">
+                <div>
+                    <p class="font-semibold mb-2">1. Who did you get a response from?</p>
+                    <div class="border p-4 text-center text-gray-500">You have no letters awaiting response</div>
+                </div>
+                <div>
+                    <p class="font-semibold mb-2">2. Which letter is this in response to?</p>
+                    <div class="border p-4 text-center text-gray-500">You have no letters awaiting response</div>
+                </div>
+                <div>
+                    <p class="font-semibold mb-2">3. Did any items get deleted/repaired?</p>
+                    <div class="border p-4 text-center text-gray-500">You have no letters awaiting response</div>
+                </div>
+            </div>
+            <div class="mt-6 flex justify-between">
+                <button class="bg-blue-500 text-white p-3 rounded">Save Response</button>
+                <button class="text-red-500" onclick="closeReceivedReply()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Follow-Up Letter -->
+    <div id="followUpLetterModal" class="fixed hidden inset-0 flex items-center justify-center modal-bg z-50">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-1/2">
+            <div class="flex justify-between mb-6">
+                <h2 class="text-xl font-semibold">Follow Up Letter</h2>
+                <button onclick="closeFollowUpLetter()" class="text-red-500">Cancel</button>
+            </div>
+            <div class="mb-4">
+                <p class="text-gray-600 font-semibold">Which followup letter would you like to create?</p>
+                <div class="border p-8 text-center text-gray-500">You have no letters that need followup</div>
+            </div>
+            <div class="mt-6 flex justify-between">
+                <button class="bg-blue-500 text-white p-3 rounded">Create Letter</button>
+                <button class="text-red-500" onclick="closeFollowUpLetter()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

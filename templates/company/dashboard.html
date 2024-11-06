@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Credit Repair Company</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+    <!-- Sidebar -->
+    <div class="flex flex-no-wrap h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-blue-900 text-white hidden md:block shadow-lg">
+            <div class="p-4 text-2xl font-bold text-center bg-blue-800">Dashboard</div>
+            <ul class="mt-4">
+                <li class="px-6 py-3 hover:bg-blue-700">
+                    <a href="#" class="block">Home</a>
+                </li>
+                <li class="px-6 py-3 hover:bg-blue-700">
+                    <a href="#" class="block">Clients</a>
+                </li>
+                <li class="px-6 py-3 hover:bg-blue-700">
+                    <a href="#" class="block">Subscription</a>
+                </li>
+                <li class="px-6 py-3 hover:bg-blue-700">
+                    <a href="#" class="block">Logs</a>
+                </li>
+                <li class="px-6 py-3 hover:bg-blue-700">
+                    <a href="#" class="block">Settings</a>
+                </li>
+                <li class="px-6 py-3 hover:bg-blue-700">
+                    <a href="#" class="block">Members</a>
+                </li>
+                <li class="px-6 py-3 hover:bg-red-700">
+                    <a href="#" class="block">Logout</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="w-full flex flex-col h-screen overflow-y-hidden">
+            <!-- Header -->
+            <header class="w-full shadow-lg bg-white flex items-center justify-between p-6">
+                <h1 class="text-xl font-semibold">Welcome to your Dashboard</h1>
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-700">Hello, [Username]</span>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="flex-grow overflow-y-auto p-6">
+                <!-- Metrics Overview -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    <div class="bg-white shadow-lg rounded-lg p-4">
+                        <h2 class="text-lg font-semibold mb-2">Total Clients</h2>
+                        <p class="text-2xl font-bold">150</p>
+                    </div>
+                    <div class="bg-white shadow-lg rounded-lg p-4">
+                        <h2 class="text-lg font-semibold mb-2">Active Disputes</h2>
+                        <p class="text-2xl font-bold">85</p>
+                    </div>
+                    <div class="bg-white shadow-lg rounded-lg p-4">
+                        <h2 class="text-lg font-semibold mb-2">Pending Actions</h2>
+                        <p class="text-2xl font-bold">23</p>
+                    </div>
+                    <div class="bg-white shadow-lg rounded-lg p-4">
+                        <h2 class="text-lg font-semibold mb-2">Subscription Status</h2>
+                        <p class="text-2xl font-bold text-green-600">Active</p>
+                    </div>
+                </div>
+
+                <!-- Client List Section -->
+                <section class="mb-6">
+                    <h2 class="text-xl font-semibold mb-4">Clients Overview</h2>
+                    <div class="bg-white shadow-lg rounded-lg p-4">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="text-gray-700 font-semibold">
+                                    <th class="px-4 py-2">Client Name</th>
+                                    <th class="px-4 py-2">Status</th>
+                                    <th class="px-4 py-2">Progress</th>
+                                    <th class="px-4 py-2">Last Update</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-gray-600">
+                                    <td class="border-t px-4 py-2">John Doe</td>
+                                    <td class="border-t px-4 py-2 text-green-500">Active</td>
+                                    <td class="border-t px-4 py-2">75%</td>
+                                    <td class="border-t px-4 py-2">2 days ago</td>
+                                </tr>
+                                <tr class="text-gray-600">
+                                    <td class="border-t px-4 py-2">Jane Smith</td>
+                                    <td class="border-t px-4 py-2 text-yellow-500">Pending</td>
+                                    <td class="border-t px-4 py-2">45%</td>
+                                    <td class="border-t px-4 py-2">5 days ago</td>
+                                </tr>
+                                <!-- Additional rows as needed -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Activity Logs Section -->
+                <section>
+                    <h2 class="text-xl font-semibold mb-4">Recent Activity Logs</h2>
+                    <div class="bg-white shadow-lg rounded-lg p-4 overflow-y-auto max-h-64">
+                        <ul>
+                            <li class="border-b py-2">
+                                <p><strong>John Doe</strong> - Dispute submitted for review</p>
+                                <p class="text-sm text-gray-500">2 hours ago</p>
+                            </li>
+                            <li class="border-b py-2">
+                                <p><strong>Jane Smith</strong> - Progress update: 45%</p>
+                                <p class="text-sm text-gray-500">3 days ago</p>
+                            </li>
+                            <li class="border-b py-2">
+                                <p><strong>Mike Johnson</strong> - New client onboarded</p>
+                                <p class="text-sm text-gray-500">1 week ago</p>
+                            </li>
+                            <!-- Additional logs as needed -->
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+</body>
+</html>
